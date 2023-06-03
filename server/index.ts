@@ -8,8 +8,7 @@ async function startServer (): Promise<void> {
     console.log('Servidor en el puerto', PORT)
     await connectDatabase()
   } catch (error) {
-    console.error('Error al iniciar el servidor')
-    throw new Error()
+    throw new Error('Error al iniciar el servidor')
   }
 }
 

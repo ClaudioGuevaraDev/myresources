@@ -7,7 +7,6 @@ export async function connectDatabase (): Promise<void> {
     await connect(MONGODB_URI)
     console.log('Base de datos conectada')
   } catch (error) {
-    console.error('Error de conexión a la base de datos')
-    throw new Error()
+    throw new Error('Error de conexión a la base de datos')
   }
 }
