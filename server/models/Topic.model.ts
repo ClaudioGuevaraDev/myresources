@@ -11,8 +11,7 @@ class TopicClass {
 
   @prop({
     type: String,
-    required: false,
-    unique: true
+    required: false
   })
   public image?: string
 }

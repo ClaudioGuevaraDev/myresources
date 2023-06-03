@@ -11,18 +11,38 @@ export const getTopics = async (req: Request, res: Response): Promise<Response> 
   }
 }
 
-export const getTopicById = (): void => {
+export const getTopicById = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { id } = req.params
+    const topic = await TopicModel.findById(id)
+    if (topic == null) return res.status(404).end()
 
+    return res.status(200).json(topic)
+  } catch (error) {
+    return res.status(500).end()
+  }
 }
 
-export const createTopic = (): void => {
+export const createTopic = async (req: Request, res: Response): Promise<Response> => {
+  const { name } = req.body
 
+  try {
+    const newTopic = new TopicModel({ name })
+    const savedTopic = await newTopic.save()
+    return res.status(201).json({ topic: savedTopic })
+  } catch (error) {
+    return res.status(500).end()
+  }
 }
 
-export const updateTopicById = (): void => {
-
-}
-
-export const deleteTopicById = (): void => {
-
+export const deleteTopicById = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const { id } = req.params
+    const topic = await TopicModel.findById(id)
+    if (topic == null) return res.status(404).end()
+    await topic.deleteOne()
+    return res.status(204).end()
+  } catch (error) {
+    return res.status(500).end()
+  }
 }
