@@ -1,33 +1,9 @@
-import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose'
+import { model, Schema } from 'mongoose'
 
-@modelOptions({
-  schemaOptions: {
-    timestamps: true,
-    versionKey: false
-  }
-})
-class Topic {
-  @prop({
-    type: String,
-    unique: true,
-    trim: true,
-    required: true
-  })
-  public name: string
+const topicSchema = new Schema({
+  name: { type: String, required: true, unique: true, trim: true },
+  image: { type: String, required: false },
+  resources: [{ type: Schema.Types.ObjectId, ref: 'Resource' }]
+}, { timestamps: true, versionKey: false })
 
-  @prop({
-    type: String,
-    required: false
-  })
-  public image?: string
-
-  @prop({
-    type: () => [String],
-    default: []
-  })
-  public resources: string[]
-}
-
-const TopicModel = getModelForClass(Topic)
-
-export { TopicModel }
+export const TopicModel = model('Topic', topicSchema)

@@ -2,9 +2,11 @@ import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import { NewTopic } from '../../interfaces/topics.interfaces'
 import { createNewTopic, updateTopicImageById } from '../../services/topics.api'
 import { toast } from 'react-toastify'
+import LoadingPurpleButton from '../../components/LoadingPurpleButton/LoadingPurpleButton'
 
 function NewTopic() {
   const [newTopic, setNewTopic] = useState<NewTopic>({ name: '', image: null })
+  const [loading, setLoading] = useState<boolean>(false)
 
   const topicImageRef = useRef<HTMLInputElement>(null)
   const disabledButton = newTopic.name === ''
@@ -20,6 +22,7 @@ function NewTopic() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setLoading(true)
     try {
       const { _id } = await createNewTopic(newTopic)
 
@@ -35,6 +38,7 @@ function NewTopic() {
     }
     setNewTopic({ name: '', image: null })
     if (topicImageRef.current) topicImageRef.current.value = ''
+    setLoading(false)
   }
 
   return (
@@ -74,13 +78,17 @@ function NewTopic() {
               onChange={handleChangeNewTopicImage}
             />
           </div>
-          <button
-            type="submit"
-            className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900 disabled:opacity-60 disabled:cursor-not-allowed"
-            disabled={disabledButton}
-          >
-            Crear Tópico
-          </button>
+          {loading ? (
+            <LoadingPurpleButton />
+          ) : (
+            <button
+              type="submit"
+              className="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900 disabled:opacity-60 disabled:cursor-not-allowed"
+              disabled={disabledButton}
+            >
+              Crear Tópico
+            </button>
+          )}
         </form>
       </div>
     </div>

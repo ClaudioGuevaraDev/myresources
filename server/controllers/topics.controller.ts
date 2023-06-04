@@ -65,7 +65,7 @@ export const editTopicImageById = async (req: Request, res: Response): Promise<R
   try {
     await sampleFile.mv(uploadPath)
     await TopicModel.findByIdAndUpdate(id, {
-      image: path.join('imgs', fileName)
+      image: `/imgs/${fileName}`
     })
     return res.status(204).end()
   } catch (error) {
