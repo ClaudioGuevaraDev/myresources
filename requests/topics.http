@@ -3,13 +3,13 @@
 ###
 GET {{api}}
 ###
-GET {{api}}/647a9429d2f4ad86573d5ff8
+GET {{api}}/647caa5e85a83d9b49b30d9e
 ###
 POST {{api}}
 Content-Type: application/json
 
 {
-    "name": "Gráficos"
+    "name": "React"
 }
 ###
 DELETE {{api}}/647a9429d2f4ad86573d5ff8

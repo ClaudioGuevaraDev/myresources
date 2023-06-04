@@ -4,6 +4,7 @@ export interface Topic {
   image?: string
   createdAt: string
   updatedAt: string
+  resources: string[]
 }
 
 export interface NewTopic {

@@ -29,7 +29,7 @@ export const createTopic = async (req: Request, res: Response): Promise<Response
   try {
     const newTopic = new TopicModel({ name })
     const savedTopic = await newTopic.save()
-    return res.status(201).json({ topic: savedTopic })
+    return res.status(201).json(savedTopic)
   } catch (error) {
     console.error(error)
     return res.status(500).end()

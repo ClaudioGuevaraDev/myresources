@@ -26,7 +26,9 @@ function TopicsList() {
               />
               <div className="h-full flex flex-col justify-between">
                 <span className="font-semibold text-lg">{topic.name}</span>
-                <span className="font-normal text-base">10 recursos</span>
+                <span className="font-normal text-base">
+                  {topic.resources.length} recursos
+                </span>
               </div>
             </div>
           )}
