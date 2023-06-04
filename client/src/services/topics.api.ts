@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NewTopic } from '../interfaces/topics.interfaces'
+import { NewTopic, Topic } from '../interfaces/topics.interfaces'
 
 const topcisApi = axios.create({ baseURL: '/api/topics' })
 
@@ -15,9 +15,16 @@ export const getTopicById = async (url: string) => {
 
 export const createNewTopic = async (newTopic: NewTopic) => {
   const response = await topcisApi.post('/', newTopic)
-  return response.data
+  return response.data as Topic
 }
 
 export const deleteTopicById = async (topicId: string) => {
   await topcisApi.delete(`/${topicId}`)
+}
+
+export const updateTopicImageById = async (
+  topicId: string,
+  formData: FormData
+) => {
+  await topcisApi.patch(`/edit-image/${topicId}`, formData)
 }

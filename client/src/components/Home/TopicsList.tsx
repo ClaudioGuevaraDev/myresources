@@ -21,8 +21,9 @@ function TopicsList() {
               onClick={() => navigate(`/topic/${topic._id}`)}
             >
               <img
-                src={topic.image ? topic.image : '/imgs/no_image.png'}
+                src={topic.image ? topic.image : '/assets/no_image.png'}
                 alt={topic.name}
+                className="w-12 h-12"
               />
               <div className="h-full flex flex-col justify-between">
                 <span className="font-semibold text-lg">{topic.name}</span>

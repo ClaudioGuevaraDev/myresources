@@ -32,7 +32,7 @@ class Resource {
     required: false,
     default: 0
   })
-  public rating?: number
+  public rating: number
 
   @prop({
     type: String,

@@ -1,26 +1,40 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import { NewTopic } from '../../interfaces/topics.interfaces'
-import { createNewTopic } from '../../services/topics.api'
+import { createNewTopic, updateTopicImageById } from '../../services/topics.api'
 import { toast } from 'react-toastify'
 
 function NewTopic() {
   const [newTopic, setNewTopic] = useState<NewTopic>({ name: '', image: null })
 
+  const topicImageRef = useRef<HTMLInputElement>(null)
   const disabledButton = newTopic.name === ''
 
   const handleChangeNewTopicName = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTopic({ ...newTopic, name: e.target.value })
   }
+  const handleChangeNewTopicImage = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target && e.target.files && e.target.files.length > 0) {
+      setNewTopic({ ...newTopic, image: e.target.files[0] })
+    }
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     try {
-      await createNewTopic(newTopic)
+      const { _id } = await createNewTopic(newTopic)
+
+      if (newTopic.image) {
+        const formData = new FormData()
+        formData.append('file', newTopic.image)
+        await updateTopicImageById(_id, formData)
+      }
+
       toast.success('Tópico creado con éxito')
     } catch (error) {
       toast.error('Error al crear el tópico')
     }
     setNewTopic({ name: '', image: null })
+    if (topicImageRef.current) topicImageRef.current.value = ''
   }
 
   return (
@@ -56,6 +70,8 @@ function NewTopic() {
               id="topicFile"
               type="file"
               required={false}
+              ref={topicImageRef}
+              onChange={handleChangeNewTopicImage}
             />
           </div>
           <button

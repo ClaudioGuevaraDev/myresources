@@ -47,9 +47,9 @@ function TopicDetail() {
       <div className="flex flex-row justify-between items-center">
         <div className="flex flex-row items-center gap-4">
           <img
-            src={topic.image ? topic.image : '/imgs/no_image.png'}
+            src={topic.image ? topic.image : '/assets/no_image.png'}
             alt={topic.name}
-            className="aspect-auto"
+            className="w-14 h-14"
           />
           <h3 className="text-3xl font-bold">{topic.name}</h3>
         </div>

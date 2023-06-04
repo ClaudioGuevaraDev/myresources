@@ -1,4 +1,7 @@
 import { type Request, type Response } from 'express'
+import { type UploadedFile } from 'express-fileupload'
+import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
 
 import { TopicModel } from '../models/Topic.model'
 
@@ -42,6 +45,28 @@ export const deleteTopicById = async (req: Request, res: Response): Promise<Resp
     const topic = await TopicModel.findById(id)
     if (topic == null) return res.status(404).end()
     await topic.deleteOne()
+    return res.status(204).end()
+  } catch (error) {
+    return res.status(500).end()
+  }
+}
+
+export const editTopicImageById = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params
+  const topic = await TopicModel.findById(id)
+  if (topic == null) return res.status(404).end()
+
+  if (req.files == null || Object.keys(req.files).length === 0) return res.status(400).end()
+
+  const sampleFile = req.files.file as UploadedFile
+  const fileName = uuidv4() + '_' + sampleFile.name
+  const uploadPath = path.join(__dirname, '..', 'public', 'imgs', fileName)
+
+  try {
+    await sampleFile.mv(uploadPath)
+    await TopicModel.findByIdAndUpdate(id, {
+      image: path.join('imgs', fileName)
+    })
     return res.status(204).end()
   } catch (error) {
     return res.status(500).end()
