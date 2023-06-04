@@ -17,3 +17,7 @@ export const createNewTopic = async (newTopic: NewTopic) => {
   const response = await topcisApi.post('/', newTopic)
   return response.data
 }
+
+export const deleteTopicById = async (topicId: string) => {
+  await topcisApi.delete(`/${topicId}`)
+}
