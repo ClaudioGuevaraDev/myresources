@@ -1,6 +1,6 @@
 import useSWR from 'swr'
-import { Topic } from '../interfaces/topics.interfaces'
-import { getTopicById } from '../services/topics.api'
+import { Topic } from '../../interfaces/topics.interfaces'
+import { getTopicById } from '../../services/topics.api'
 
 interface Props {
   topicId: string

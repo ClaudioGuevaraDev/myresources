@@ -1,6 +1,6 @@
 import useSWR from 'swr'
-import { Topic } from '../interfaces/topics.interfaces'
-import { getTopics } from '../services/topics.api'
+import { Topic } from '../../interfaces/topics.interfaces'
+import { getTopics } from '../../services/topics.api'
 
 function useGetTopics() {
   const {

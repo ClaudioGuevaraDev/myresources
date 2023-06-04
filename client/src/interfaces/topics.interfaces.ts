@@ -5,3 +5,8 @@ export interface Topic {
   createdAt: string
   updatedAt: string
 }
+
+export interface NewTopic {
+  name: string
+  image: File | null
+}

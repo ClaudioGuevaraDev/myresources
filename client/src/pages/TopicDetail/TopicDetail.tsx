@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import useGetTopic from '../../hooks/useGetTopic'
+import useGetTopic from '../../hooks/topics/useGetTopic'
 import { Navigate } from 'react-router-dom'
 
 function TopicDetail() {

@@ -1,4 +1,4 @@
-import useGetTopics from '../../hooks/useGetTopics'
+import useGetTopics from '../../hooks/topics/useGetTopics'
 
 import { useNavigate } from 'react-router-dom'
 
