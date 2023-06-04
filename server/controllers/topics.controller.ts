@@ -1,6 +1,6 @@
 import { type Request, type Response } from 'express'
 
-import TopicModel from '../models/Topic.model'
+import { TopicModel } from '../models/Topic.model'
 
 export const getTopics = async (req: Request, res: Response): Promise<Response> => {
   try {
@@ -31,6 +31,7 @@ export const createTopic = async (req: Request, res: Response): Promise<Response
     const savedTopic = await newTopic.save()
     return res.status(201).json({ topic: savedTopic })
   } catch (error) {
+    console.error(error)
     return res.status(500).end()
   }
 }

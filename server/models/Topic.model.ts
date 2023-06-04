@@ -1,6 +1,13 @@
-import { getModelForClass, prop } from '@typegoose/typegoose'
+import { getModelForClass, modelOptions, prop } from '@typegoose/typegoose'
 
-class TopicClass {
+@modelOptions({
+
+  schemaOptions: {
+    timestamps: true,
+    versionKey: false
+  }
+})
+class Topic {
   @prop({
     type: String,
     unique: true,
@@ -14,13 +21,14 @@ class TopicClass {
     required: false
   })
   public image?: string
+
+  @prop({
+    type: () => [String],
+    default: []
+  })
+  public resources: string[]
 }
 
-const TopicModel = getModelForClass(TopicClass, {
-  schemaOptions: {
-    timestamps: true,
-    versionKey: false
-  }
-})
+const TopicModel = getModelForClass(Topic)
 
-export default TopicModel
+export { TopicModel }
