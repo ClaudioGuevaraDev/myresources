@@ -1,0 +1,16 @@
+@api = http://localhost:3000/api/resources
+
+###
+GET {{api}}
+###
+POST {{api}}
+Content-Type: application/json
+
+{
+    "name": "Tailwind ui",
+    "topicId": "647e7e0bfc5d605232912650",
+    "link": "https://www.tailwind-kit.com/",
+    "rating": 4.5
+}
+###
+DELETE {{api}}/647e7ce37f31dc99a9d9ffeb
