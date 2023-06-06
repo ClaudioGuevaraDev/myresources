@@ -7,10 +7,10 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "name": "Tailwind ui",
-    "topicId": "647e7e0bfc5d605232912650",
-    "link": "https://www.tailwind-kit.com/",
-    "rating": 4.5
+    "name": "Scroll Reveal 3",
+    "topicId": "647e85c4c0cef15f3f756556",
+    "link": "https://scrollrevealjs.org/",
+    "rating": 5
 }
 ###
-DELETE {{api}}/647e7ce37f31dc99a9d9ffeb
+DELETE {{api}}/647e85e6c0cef15f3f756559

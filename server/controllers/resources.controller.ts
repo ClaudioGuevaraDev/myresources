@@ -1,5 +1,6 @@
 import { type Request, type Response } from 'express'
 import { type UploadedFile } from 'express-fileupload'
+import type mongoose from 'mongoose'
 import path from 'path'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -34,9 +35,18 @@ export const deleteResourceById = async (req: Request, res: Response): Promise<R
   const { id } = req.params
   const resource = await ResourceModel.findById(id)
   if (resource == null) return res.status(404).end()
-
+  const topic = await TopicModel.findById(resource.topic?._id)
   try {
     await resource.deleteOne()
+    if (topic != null) {
+      const filterResources: mongoose.Types.ObjectId[] = []
+      for (let i = 0; i < topic.resources.length; i++) {
+        if (topic.resources[i].toString() !== resource._id.toString()) {
+          filterResources.push(topic.resources[i])
+        }
+      }
+      await TopicModel.findByIdAndUpdate(topic._id, { resources: filterResources })
+    }
     return res.status(204).end()
   } catch (error) {
     return res.status(500).end()

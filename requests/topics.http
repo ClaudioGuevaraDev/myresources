@@ -9,7 +9,7 @@ POST {{api}}
 Content-Type: application/json
 
 {
-    "name": "Tailwind"
+    "name": "Animaciones"
 }
 ###
-DELETE {{api}}/647e7e0bfc5d605232912650
+DELETE {{api}}/647e85c4c0cef15f3f756556
