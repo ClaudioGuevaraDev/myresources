@@ -16,6 +16,13 @@ export const getResources = async (req: Request, res: Response): Promise<Respons
   }
 }
 
+export const getResourceById = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params
+  const resource = await ResourceModel.findById(id)
+  if (resource == null) return res.status(404).end()
+  return res.status(200).json(resource)
+}
+
 export const createResource = async (req: Request, res: Response): Promise<Response> => {
   const { name, link, rating, topicId } = req.body
   const topic = await TopicModel.findById(topicId)
