@@ -85,7 +85,8 @@ function TopicDetail() {
             <img
               src={resource.image ? resource.image : '/assets/no_image.png'}
               alt={resource.name}
-              className="w-12 h-12"
+              className="w-12 h-12 cursor-pointer"
+              onClick={() => navigate(`/edit-resource/${resource._id}`)}
             />
             <div className="h-full flex flex-col justify-between">
               <div className="font-semibold text-lg flex items-center justify-between gap-2">
