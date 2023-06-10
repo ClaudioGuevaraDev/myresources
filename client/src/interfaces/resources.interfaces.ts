@@ -8,3 +8,10 @@ export interface Resource {
   createdAt: string
   updatedAt: string
 }
+
+export interface NewResource {
+  name: string
+  link: string
+  image: File | null
+  rating: number
+}
