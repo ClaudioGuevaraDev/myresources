@@ -2,7 +2,10 @@ import { ChangeEvent, FormEvent, useRef, useState } from 'react'
 import LoadingPurpleButton from '../../components/LoadingPurpleButton/LoadingPurpleButton'
 import { NewResource } from '../../interfaces/resources.interfaces'
 import { Navigate, useParams } from 'react-router-dom'
-import { createResource } from '../../services/resource.api'
+import {
+  createResource,
+  updateResourceImageById,
+} from '../../services/resource.api'
 import { toast } from 'react-toastify'
 
 function NewResource() {
@@ -44,7 +47,14 @@ function NewResource() {
     e.preventDefault()
 
     try {
-      await createResource(newResource, topicId)
+      const { _id } = await createResource(newResource, topicId)
+
+      if (newResource.image) {
+        const formData = new FormData()
+        formData.append('file', newResource.image)
+        await updateResourceImageById(_id, formData)
+      }
+
       toast.success('Recurso añadido con éxito')
     } catch (error) {
       toast.error('Error al crear el recurso')

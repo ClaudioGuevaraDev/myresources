@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { NewResource } from '../interfaces/resources.interfaces'
+import { NewResource, Resource } from '../interfaces/resources.interfaces'
 
 const resourcesApi = axios.create({ baseURL: '/api/resources' })
 
@@ -13,5 +13,13 @@ export const createResource = async (
   topicId: string
 ) => {
   const body = { ...newResource, topicId }
-  await resourcesApi.post('/', body)
+  const response = await resourcesApi.post('/', body)
+  return response.data as Resource
+}
+
+export const updateResourceImageById = async (
+  topicId: string,
+  formData: FormData
+) => {
+  await resourcesApi.patch(`/edit-image/${topicId}`, formData)
 }

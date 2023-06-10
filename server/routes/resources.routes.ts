@@ -6,7 +6,7 @@ const router = Router()
 
 router.get('/', getResources)
 router.post('/', createResource)
-router.patch('/:id', editResourceImageById)
+router.patch('/edit-image/:id', editResourceImageById)
 router.delete('/:id', deleteResourceById)
 
 export default router
