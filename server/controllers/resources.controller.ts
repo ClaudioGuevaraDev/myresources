@@ -81,3 +81,16 @@ export const editResourceImageById = async (req: Request, res: Response): Promis
     return res.status(500).end()
   }
 }
+
+export const updateResource = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params
+  const resource = await ResourceModel.findById(id)
+  if (resource == null) return res.status(404).end()
+
+  try {
+    await ResourceModel.findByIdAndUpdate(id, req.body)
+    return res.status(204).end()
+  } catch (error) {
+    return res.status(500).end()
+  }
+}

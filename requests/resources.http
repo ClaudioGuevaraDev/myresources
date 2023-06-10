@@ -16,3 +16,12 @@ Content-Type: application/json
 }
 ###
 DELETE {{api}}/647e85e6c0cef15f3f756559
+###
+PUT {{api}}/6483c18178e2fd57daa73cd0
+Content-Type: application/json
+
+{
+    "name": "FLOWBITE",
+    "link": "https://tailwindui.com/",
+    "rating": 3
+}
