@@ -13,7 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang='en'>
       <body className={inter.className}>
         <div className='bg-gray-900 w-full h-full min-h-screen text-white'>
-          <div className='container mx-auto p-5 h-screen'>{children}</div>
+          <div className='container mx-auto p-5 min-h-screen'>{children}</div>
         </div>
       </body>
     </html>
