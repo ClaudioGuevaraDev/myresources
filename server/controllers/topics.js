@@ -24,7 +24,7 @@ export const createTopic = async (req, res) => {
     const { insertedId } = await col.insertOne({ name, resources: [] });
 
     return res.status(201).json({
-      data: { insertedId, name },
+      data: { _id: insertedId },
       message: "Tópico creado con éxito",
     });
   } catch (error) {
